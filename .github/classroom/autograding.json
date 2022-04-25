@@ -1,0 +1,13 @@
+{
+  "tests": [
+   {
+      "name": "test oop",
+      "setup": "",
+      "run": "mvn verify --file pom.xml",
+      "input": "",
+      "output": "",
+      "timeout": 3,
+      "points": 3
+    }
+   ]
+}
