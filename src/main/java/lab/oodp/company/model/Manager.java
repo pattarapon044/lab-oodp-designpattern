@@ -146,16 +146,14 @@ public class Manager extends Employee {
     // TODO override and implement equals()
     @Override
     public boolean equals(Object o){
-        if (o == null){
-            return false;
-        }
-
+        // This can check o is null because null is not instances of Manger
         if (o instanceof Manager){
             Manager other = (Manager) o;
-            return super.equals(o)
-                    && Objects.equals(this.employees, other.getEmployees());
+            // Check with super class and add employees list to check too
+            return super.equals(o) && Objects.equals(this.employees, other.getEmployees());
         }
 
+        // If o is null or not instances of Manger
         return false;
     }
 
