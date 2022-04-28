@@ -54,7 +54,7 @@ public class TestEmployeeAndManager {
      * the methods haven't yet been typed out (i.e. I can try to call methods which may not even exist, and have the
      * program still compile).
      * <p>
-     * For interest, see: https://www.geeksforgeeks.org/reflection-in-java/
+     * For interest, see: <a href="Reflection in java">https://www.geeksforgeeks.org/reflection-in-java/</a>
      */
     @Test
     public void testGetters() {
@@ -253,7 +253,7 @@ public class TestEmployeeAndManager {
         assertEquals(caitlin, anne.getEmployees().get(0));
         assertEquals(eve, anne.getEmployees().get(1));
 
-        assertEquals(1, bob.getEmployees().size());
+        assertEquals(2, bob.getEmployees().size());
         assertEquals(dave, bob.getEmployees().get(0));
     }
 

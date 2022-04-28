@@ -1,9 +1,6 @@
 package lab.oodp.company.model;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * A special type of Employee that can also manage other employees.
@@ -12,6 +9,8 @@ import java.util.Objects;
  */
 public class Manager extends Employee {
 
+    // Necessary fields
+    private final List<Employee> employees = new ArrayList<>();
 
     /**
      * Creates a new manager
@@ -34,7 +33,7 @@ public class Manager extends Employee {
      */
     public List<Employee> getEmployees() {
         // TODO complete this
-        return null;
+        return employees;
     }
 
     /**
@@ -47,21 +46,40 @@ public class Manager extends Employee {
      */
     public void addEmployee(Employee employee) {
         // TODO complete this
+
+        // Throw NullPointer exception if employee that be added is null
+        if (employee == null) throw new NullPointerException("NullPointerException was expected");
+
+        // Add employee to employees list if it is not exists in list
+        if (!employees.contains(employee)) {
+            employees.add(employee); // Add to list
+            employee.setManager(this); // Just link employee's manger to this too
+        }
     }
 
     /**
      * Removes the given employee from this manager. If the given employee isn't managed by this manager, this method
      * should do nothing.
      *
-     * @param employee
+     * @param employee the employee to be removed
      * @throws NullPointerException if the employee is null
      */
     public void removeEmployee(Employee employee) {
         // TODO complete this
+        // Throw NullPointer exception if removal needed employee is null
+        if (employee == null){
+            throw new NullPointerException("NullPointerException was expected");
+        }
+
+        // Remove employee If employee is in this employees list
+        if (employees.contains(employee)){
+            this.employees.remove(employee); // Remove from list
+            employee.setManager(null); // Set manager of removed employee to null
+        }
     }
 
     /**
-     * Gets a list of all employees starting with this one, and including all descendents. This list should be
+     * Gets a list of all employees starting with this one, and including all descendants. This list should be
      * generated using pre-order traversal of the employment hierarchy.
      * <p>
      * For example, if this employee is "The Boss", and this is the boss's employment hierarchy:
@@ -89,13 +107,30 @@ public class Manager extends Employee {
      *     <li>Eve</li>
      * </ul>
      * <p>
-     * See: https://www.tutorialspoint.com/data_structures_algorithms/tree_traversal.htm
+     * See: <a href="https://www.tutorialspoint.com/data_structures_algorithms/tree_traversal.htm">tree traversal algorithms</a>
      *
      * @return a list containing this employee and all employees directly or indirectly managed by this employee
      */
     public List<Employee> getAllEmployees() {
         // TODO complete this
-        return null;
+        List<Employee> allEmployees = new ArrayList<>();
+        Iterator<Employee> i = employees.iterator();
+        allEmployees.add(this); //Add this to list first
+
+        while (i.hasNext()){
+            Employee current = i.next();
+
+            // If current is a manger, just call like a recursive function with current's getEmployees method
+            // Bigger one will be added to the list first following with lower more
+            if (current instanceof Manager){
+                Manager manger = (Manager) current;
+                allEmployees.addAll(manger.getAllEmployees()); // recursive
+            } else { // If current is a leaf is just add it to list
+                allEmployees.add(current);
+            }
+        }
+
+        return allEmployees;
     }
 
     /**
@@ -109,6 +144,19 @@ public class Manager extends Employee {
      * @return true if the object meets the conditions outlined above, false otherwise
      */
     // TODO override and implement equals()
+    @Override
+    public boolean equals(Object o){
+        if (o == null){
+            return false;
+        }
 
+        if (o instanceof Manager){
+            Manager other = (Manager) o;
+            return super.equals(o)
+                    && Objects.equals(this.employees, other.getEmployees());
+        }
+
+        return false;
+    }
 
 }
