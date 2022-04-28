@@ -18,7 +18,7 @@ if you don't improve yourself I think you are in trouble for sure.
 Finally, who read these all and copy my works please treat me for the dinner.
 If you don't, I wish the lecturer punishes you hardly.
 
-### Translator
+## Translator
 เลี้ยงข้าวกูซะไม่งั้นอาจารย์จะลงโทษพวกมึงอย่างหนัก 
 <br><br>
 ตั้งใจเรียนนะ เข้าใจว่ามันยากแต่อยากให้ลองพยายามดูก่อน
